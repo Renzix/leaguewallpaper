@@ -48,13 +48,26 @@ ChampName=findChamp(dic["matches"][0]["champion"]);
 print("Last played champ:"+ChampName)
 
 #Set wallpaper
+
+#For i3 and other Basic window managers
 if(platform.system()=="Linux"):
     bashCommand="feh --bg-scale /home/renzix/Wallpaper/"+ChampName+".jpg"
     process = subprocess.Popen(bashCommand.split(), stdout=subprocess.PIPE)
 
-if(platform.system()=="Windows")
-    print("Windows is not supported yet give me a minute");
+#for Windows 
+if(platform.system()=="Windows"):
+    import ctypes
+    import os
+    drive = "C:\\"
+    folder = "images"
+    image = ChampName+".jpg"
+    image_path = os.path.join(drive, folder, image)
+    SPI_SETDESKWALLPAPER = 20 
+    ctypes.windll.user32.SystemParametersInfoA(SPI_SETDESKWALLPAPER, 0, image_path, 3)
 
+#for Mac
+if(platform.system()=="Mac"):
+    print("Mac is not supported yet give me a minute");
 
 #Exit without error
 sys.exit(0)
