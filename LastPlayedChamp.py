@@ -52,4 +52,9 @@ if(platform.system()=="Linux"):
     bashCommand="feh --bg-scale /home/renzix/Wallpaper/"+ChampName+".jpg"
     process = subprocess.Popen(bashCommand.split(), stdout=subprocess.PIPE)
 
+if(platform.system()=="Windows")
+    print("Windows is not supported yet give me a minute");
+
+
+#Exit without error
 sys.exit(0)
