@@ -1,4 +1,6 @@
 #!/usr/bin/python
+__Main()__:
+e
 import requests, sys, subprocess, platform
 #Riot API key
 API="RGAPI-a63a35a1-baf0-4656-b68d-f3729490b356"
@@ -59,7 +61,7 @@ if(platform.system()=="Windows"):
     import ctypes
     import os
     drive = "C:\\"
-    folder = "images"
+    folder = "Pictures\\LeagueWallpaper"
     image = ChampName+".jpg"
     image_path = os.path.join(drive, folder, image)
     SPI_SETDESKWALLPAPER = 20 
