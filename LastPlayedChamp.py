@@ -37,7 +37,7 @@ AccID=findID(leaguename);
 #See if name is invalid
 if(AccID==-1):
     print("Invalid name...");
-    sys.exit();
+    sys.exit(1);
 print("Account ID:"+str(AccID));
 
 #get past 20 matches
@@ -51,3 +51,5 @@ print("Last played champ:"+ChampName)
 if(platform.system()=="Linux"):
     bashCommand="feh --bg-scale /home/renzix/Wallpaper/"+ChampName+".jpg"
     process = subprocess.Popen(bashCommand.split(), stdout=subprocess.PIPE)
+
+sys.exit(0)
