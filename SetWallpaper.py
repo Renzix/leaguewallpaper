@@ -17,7 +17,7 @@ def findID(name):
 #Turn Champ ID into Champ name
 def findChamp(ID):
     patch="7.17.2"
-    url="http://ddragon.leagueoflegends.com/cdn/+"patch"+/data/en_US/champion.json" 
+    url="http://ddragon.leagueoflegends.com/cdn/"+patch+"/data/en_US/champion.json" 
     r=requests.get(url)
     for key in r.json()["data"].items():
         if(ID==int(key[1]["key"])):
@@ -54,15 +54,17 @@ print("Last played champ:"+ChampName)
 
 #For i3 and other Basic window managers
 if(platform.system()=="Linux"):
+    print("OS:Linux");
     import pwd
     import os
     username=pwd.getpwuid( os.getuid() )[ 0 ];
-    print("username"+username);
+    print("Username:"+username);
     bashCommand="feh --bg-scale /home/"+username+"/.leaguewallpaper/"+ChampName+".jpg"
     process = subprocess.Popen(bashCommand.split(), stdout=subprocess.PIPE)
 
 #for Windows 
 if(platform.system()=="Windows"):
+    print("OS:Windows")
     import ctypes
     import os
     drive = "C:\\"
@@ -74,6 +76,7 @@ if(platform.system()=="Windows"):
 
 #for Mac
 if(platform.system()=="Mac"):
+    print("OS:Mac")
     print("Mac is not supported yet give me a minute");
 
 #Exit without error
