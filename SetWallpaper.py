@@ -1,19 +1,39 @@
 #!/usr/bin/python
+print("Starting Set Wallpaper")
 
 import requests, sys, subprocess, platform
 #Riot API key
 API="RGAPI-795e8bce-90c0-494d-ad67-96098278e832"
+
 #Turn Summoner name into Account ID
-def findID(name):
+def findAccID(name):
     url="https://na1.api.riotgames.com/lol/summoner/v3/summoners/by-name/"+name+"?api_key="+API
     r=requests.get(url)
-    print(name);
     if "accountId" in r.json():
-        print(r.json()["accountId"]);
         return r.json()["accountId"];
     else:
         return -1;
     
+def findSumID(name):
+    url="https://na1.api.riotgames.com/lol/summoner/v3/summoners/by-name/"+name+"?api_key="+API
+    r=requests.get(url)
+    if "id" in r.json():
+        return r.json()["id"];
+    else:
+        return -1;
+
+def CurrentGame(SumID):
+    url="https://na1.api.riotgames.com/lol/spectator/v3/active-games/by-summoner/"+str(SumID)+"?api_key="+API
+    r=requests.get(url);
+    try:
+        r.json()["status"]["status_code"];
+        return r.json()["status"]["status_code"]*-1;
+    except KeyError:
+        for person in r.json()["participants"]:
+            if(person["summonerId"]==SumID):
+                return person["championId"];
+    return -1;
+
 #Turn Champ ID into Champ name
 def findChamp(ID):
     patch="7.17.2"
@@ -35,19 +55,31 @@ except FileNotFoundError:
     f.close;
 print("League Name:"+leaguename)
 
-#find Account ID
-AccID=findID(leaguename);
-#See if name is invalid
-if(AccID==-1):
+#find SummonerID
+SumID=findSumID(leaguename)
+#if SumID doesnt exist exit with error
+if(SumID==-1):
     print("Invalid name...");
     sys.exit(1);
+print("Summoner ID:"+ str(SumID));
+
+#find Account ID
+AccID=findAccID(leaguename);
 print("Account ID:"+str(AccID));
 
-#get past 20 matches
-url="https://na1.api.riotgames.com/lol/match/v3/matchlists/by-account/"+str(AccID)+"/recent?api_key="+API
-r=requests.get(url);
-dic=r.json();
-ChampName=findChamp(dic["matches"][0]["champion"]);
+#if in current game return current champ
+ChampName=findChamp(CurrentGame(SumID));
+if(not ChampName):
+    #get past 20 matches
+    url="https://na1.api.riotgames.com/lol/match/v3/matchlists/by-account/"+str(AccID)+"/recent?api_key="+API
+    r=requests.get(url);
+    dic=r.json();
+    ChampName=findChamp(dic["matches"][0]["champion"]);
+
+#get rid of white space
+ChampName=ChampName.replace(" ", "");
+ChampName=ChampName.replace("'","");
+#print out last played champ
 print("Last played champ:"+ChampName)
 
 #Set wallpaper
@@ -80,4 +112,5 @@ if(platform.system()=="Mac"):
     print("Mac is not supported yet give me a minute");
 
 #Exit without error
+print("Exiting...\n")
 sys.exit(0)
