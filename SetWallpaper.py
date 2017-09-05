@@ -1,22 +1,23 @@
 #!/usr/bin/python
-__Main()__:
-e
+
 import requests, sys, subprocess, platform
 #Riot API key
-API="RGAPI-a63a35a1-baf0-4656-b68d-f3729490b356"
-
+API="RGAPI-795e8bce-90c0-494d-ad67-96098278e832"
 #Turn Summoner name into Account ID
 def findID(name):
     url="https://na1.api.riotgames.com/lol/summoner/v3/summoners/by-name/"+name+"?api_key="+API
     r=requests.get(url)
+    print(name);
     if "accountId" in r.json():
-        return r.json()["accountId"]
+        print(r.json()["accountId"]);
+        return r.json()["accountId"];
     else:
         return -1;
     
 #Turn Champ ID into Champ name
 def findChamp(ID):
-    url="http://ddragon.leagueoflegends.com/cdn/6.24.1/data/en_US/champion.json" 
+    patch="7.17.2"
+    url="http://ddragon.leagueoflegends.com/cdn/+"patch"+/data/en_US/champion.json" 
     r=requests.get(url)
     for key in r.json()["data"].items():
         if(ID==int(key[1]["key"])):
@@ -53,7 +54,11 @@ print("Last played champ:"+ChampName)
 
 #For i3 and other Basic window managers
 if(platform.system()=="Linux"):
-    bashCommand="feh --bg-scale /home/renzix/Wallpaper/"+ChampName+".jpg"
+    import pwd
+    import os
+    username=pwd.getpwuid( os.getuid() )[ 0 ];
+    print("username"+username);
+    bashCommand="feh --bg-scale /home/"+username+"/.leaguewallpaper/"+ChampName+".jpg"
     process = subprocess.Popen(bashCommand.split(), stdout=subprocess.PIPE)
 
 #for Windows 
