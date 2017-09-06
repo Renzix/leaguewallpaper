@@ -104,18 +104,6 @@ except FileNotFoundError:
 
 
 """
-#Set wallpaper
-
-#For i3 and other Basic window managers
-if(platform.system()=="Linux"):
-    print("OS:Linux");
-    import pwd
-    import os
-    username=pwd.getpwuid( os.getuid() )[ 0 ];
-    print("Username:"+username);
-    bashCommand="feh --bg-scale /home/"+username+"/.leaguewallpaper/"+ChampName+".jpg"
-    process = subprocess.Popen(bashCommand.split(), stdout=subprocess.PIPE)
-
 #for Windows 
 if(platform.system()=="Windows"):
     print("OS:Windows")

@@ -1,6 +1,6 @@
 #!/usr/bin/python
 
-import platform, os, sys, subprocess
+import os, sys, subprocess
 
 #set up
 
