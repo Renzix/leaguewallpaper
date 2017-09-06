@@ -33,7 +33,9 @@
   <p>In order of priority<aside>(some may be easier then others)</aside></p>
 
   <ul>
+    <li>Work in Windows</li>
     <li>Highly Configurable Config File</li>
-    <li>Installer</li>
+    <li>Windows Installer</li>
+    <li>Mac Installer</li>
   </ul>
 </html>
