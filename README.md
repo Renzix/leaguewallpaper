@@ -25,7 +25,7 @@
       </li>
     </ul>
     </li>
-   <li>NA only</li>
+   <li>All Regions</li>
   </ul>
 
   <h3>Planned Features</h3>
