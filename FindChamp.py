@@ -1,13 +1,28 @@
 #!/usr/bin/python
-print("Finding Champion")
+print("Finding Champion...")
 
-import requests, sys, subprocess, platform
-#Riot API key
+import requests, sys
+#Riot API key will be encrypted using .ini file when/if I get a real one
 API="RGAPI-82dff4b7-821a-4eac-bf66-19673c6ab364"
+
+#Gets some variables from config
+try:
+    f=open("config.txt","r");
+    config=f.readlines();
+    f.seek(0);
+    for line in config:
+        if(line[0:11]=="LeagueName:"):
+            leaguename=line.replace("LeagueName:","").replace("\n","");
+        elif(line[0:7]=="Region:"):
+            Region=line.replace("Region:","").replace("\n","").lower();
+    f.close();
+except FileNotFoundError:
+    print("Config file not found")
+    sys.exit(1);
 
 #Turn Summoner name into Account ID
 def findAccID(name):
-    url="https://na1.api.riotgames.com/lol/summoner/v3/summoners/by-name/"+name+"?api_key="+API
+    url="https://"+Region+".api.riotgames.com/lol/summoner/v3/summoners/by-name/"+name+"?api_key="+API
     r=requests.get(url)
     if "accountId" in r.json():
         return r.json()["accountId"];
@@ -15,7 +30,7 @@ def findAccID(name):
         return -1;
     
 def findSumID(name):
-    url="https://na1.api.riotgames.com/lol/summoner/v3/summoners/by-name/"+name+"?api_key="+API
+    url="https://"+Region+".api.riotgames.com/lol/summoner/v3/summoners/by-name/"+name+"?api_key="+API
     r=requests.get(url)
     if "id" in r.json():
         return r.json()["id"];
@@ -23,7 +38,7 @@ def findSumID(name):
         return -1;
 
 def CurrentGame(SumID):
-    url="https://na1.api.riotgames.com/lol/spectator/v3/active-games/by-summoner/"+str(SumID)+"?api_key="+API
+    url="https://"+Region+".api.riotgames.com/lol/spectator/v3/active-games/by-summoner/"+str(SumID)+"?api_key="+API
     r=requests.get(url);
     try:
         r.json()["status"]["status_code"];
@@ -37,25 +52,12 @@ def CurrentGame(SumID):
 
 #Turn Champ ID into Champ name
 def findChamp(ID):
-    patch="7.17.2"
+    patch="7.17.2" #Make it find regions latest patch...
     url="http://ddragon.leagueoflegends.com/cdn/"+patch+"/data/en_US/champion.json" 
     r=requests.get(url)
     for key in r.json()["data"].items():
         if(ID==int(key[1]["key"])):
             return key[1]["name"];
-
-
-#finds league name from file or asks for it then puts it in a file
-try:
-    f=open("config.txt","r");
-    leaguename=f.readline();
-    leaguename=leaguename.replace("LeagueName:", "");
-    leaguename=leaguename.replace("\n","");
-    f.close();
-except FileNotFoundError:
-    f.close();
-    sys.exit(1);
-print("League Name:"+leaguename)
 
 #find SummonerID
 SumID=findSumID(leaguename)
@@ -73,7 +75,7 @@ print("Account ID:"+str(AccID));
 ChampName=findChamp(CurrentGame(SumID));
 if(not ChampName):
     #get past 20 matches
-    url="https://na1.api.riotgames.com/lol/match/v3/matchlists/by-account/"+str(AccID)+"/recent?api_key="+API
+    url="https://"+Region+".api.riotgames.com/lol/match/v3/matchlists/by-account/"+str(AccID)+"/recent?api_key="+API
     r=requests.get(url);
     dic=r.json();
     ChampName=findChamp(dic["matches"][0]["champion"]);
@@ -93,7 +95,7 @@ try:
         if "CurrentChamp:" not in line:
             f.write(line);
         else:
-            f.write("CurrentChamp:"+ChampName);
+            f.write("CurrentChamp:"+ChampName+"\n");
     f.truncate()
     f.close()
 except FileNotFoundError:
