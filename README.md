@@ -1,24 +1,39 @@
-# leaguewallpaper
+<!doctype html>
 
-Hi this is my first time using a API.
+<html>
+  
+  <h1>League Wallpaper</h1>
+  <p>Hi this is my first time using a API.</p>
 
-<h3>Scope</h3>
+  <h3>Scope</h3>
 
-The scope of the project is too make a cross platform Wallpaper changer and hook it up to riots API to change the
-wallpaper every time you change your champion
-
+  <p>The scope of the project is too make a cross platform Wallpaper changer and hook it up to riots API to change the wallpaper every time you change your champion</p>
 
 
-<h3>Current Features</h3>
 
-<ul>
-  <li>Supported OS's
+  <h3>Current Features</h3>
+
   <ul>
+   <li>Changes Wallpaper</li>
+   <li>Any League Name</li>
+   <li>Supported OS's
+   <ul>
     <li>Linux
-    <ul>
-      <li>Desktop Environments that supports feh such as i3</li>
+      <ul>
+        <li>Desktop Environments that supports feh such as i3</li>
+      </ul>
+      </li>
     </ul>
     </li>
-  </ul
-  </li>
-</ul>
+    <li>NA only</li>
+  </ul>
+
+  <h3>Planned Features</h3>
+
+  <p>In order of priority<aside>(some may be easier then others)</aside></p>
+
+  <ul>
+    <li>Highly Configurable Config File</li>
+    <li>Installer</li>
+  </ul>
+</html>

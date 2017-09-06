@@ -3,7 +3,7 @@ print("Starting Set Wallpaper")
 
 import requests, sys, subprocess, platform
 #Riot API key
-API="RGAPI-795e8bce-90c0-494d-ad67-96098278e832"
+API="RGAPI-82dff4b7-821a-4eac-bf66-19673c6ab364"
 
 #Turn Summoner name into Account ID
 def findAccID(name):
