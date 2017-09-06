@@ -36,9 +36,9 @@
     <li>Work in Windows</li>
     <li>Highly Configurable Config File</li>
     <li>Windows Installer</li>
+    <li>Config Options in Installer</li>
     <li>Work in Mac</li>
     <li>Mac Installer</li>
-    <li>Config Options in Installer</li>
     <li>Work in Gnome/KDE</li>
     <li>Linux Installer</li>
   </ul>
