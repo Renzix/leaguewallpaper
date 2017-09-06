@@ -1,5 +1,7 @@
 #!/bin/bash
 
-while ./SetWallpaper.py; do
+while true; do
+	./FindChamp.py
+	./SetWallpaper.py
 	sleep 1m
 done
