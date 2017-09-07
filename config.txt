@@ -1,3 +1,3 @@
-LeagueName:hide on bush
-CurrentChamp:Kennen
-Region:KR
+LeagueName:Dyrus
+CurrentChamp:Shen
+Region:NA1

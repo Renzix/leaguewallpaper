@@ -3,7 +3,7 @@ print("Finding Champion...")
 
 import requests, sys
 #Riot API key will be encrypted using .ini file when/if I get a real one
-API="RGAPI-82dff4b7-821a-4eac-bf66-19673c6ab364"
+API="RGAPI-f8447fca-07cd-4e72-b424-775efdb060f6"
 
 #Gets some variables from config
 try:
@@ -60,6 +60,7 @@ def findChamp(ID):
             return key[1]["name"];
 
 #find SummonerID
+print(leaguename)
 SumID=findSumID(leaguename)
 #if SumID doesnt exist exit with error
 if(SumID==-1):
