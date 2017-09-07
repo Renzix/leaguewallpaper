@@ -32,7 +32,9 @@ if(OsName=="Linux"):
         process=subprocess.Popen(bashCommand.split(), stdout=subprocess.PIPE);
 
 elif OsName in ["Windows","cygwin"]:
-    print("Windows is not yet suppored");
+    import ctypes
+    SPI_SETDESKWALLPAPER = 20 
+    ctypes.windll.user32.SystemParametersInfoA(SPI_SETDESKWALLPAPER, 0, "test.jpg" , 0)
 elif(OsName=="darwin"):
     print("Mac is not yet supported");
 else:

@@ -42,4 +42,10 @@
     <li>Work in Gnome/KDE</li>
     <li>Linux Installer</li>
   </ul>
+
+  <h3>Known Buggs</h3>
+  
+  <p>For some reason it takes a while to update the last played champ however you can see in game champ. ie Plays Kha'Zix then Veigar. It will show last played as Kha'Zix and as soon as you go in game it shows in game champ.</p>
+
 </html>
+
