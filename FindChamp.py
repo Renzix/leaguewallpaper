@@ -30,7 +30,7 @@ def findAccID(name):
         return -1;
     
 def findSumID(name):
-    url="https://"+Region+".api.riotgames.com/lol/summoner/v3/summoners/by-name/"+name+"?api_key="+API
+    url="https://"+Region+".api.riotgames.com/lol/summoner/v3/summoners/by-name/"+name+"?api_key="+API;
     r=requests.get(url)
     if "id" in r.json():
         return r.json()["id"];
